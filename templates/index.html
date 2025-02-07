@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sistem Informasi Mahasiswa</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      .btn {
+        display: inline-block;
+        padding: 5px 10px;
+        text-decoration: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 3px;
+      }
+      .btn-hapus {
+        background-color: #dc3545;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Daftar Mahasiswa Amik Nurmal Luwuk Banggai</h1>
+    <a href="{{ url_for('tambah_mahasiswa') }}" class="btn"
+      >Tambah Mahasiswa Baru</a
+    >
+    <br /><br />
+    <table>
+      <thead>
+        <tr>
+          <th>NIM</th>
+          <th>Nama</th>
+          <th>Prodi</th>
+          <th>Semester</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for mahasiswa in mahasiswas %}
+        <tr>
+          <td>{{ mahasiswa.nim }}</td>
+          <td>{{ mahasiswa.nama }}</td>
+          <td>{{ mahasiswa.prodi }}</td>
+          <td>{{ mahasiswa.semester }}</td>
+          <td>
+            <a
+              href="{{ url_for('edit_mahasiswa', id=mahasiswa.id) }}"
+              class="btn"
+              >Edit</a
+            >
+            <a
+              href="{{ url_for('hapus_mahasiswa', id=mahasiswa.id) }}"
+              class="btn btn-hapus"
+              onclick="return confirm('Yakin ingin menghapus?')"
+              >Hapus</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
